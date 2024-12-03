@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   jenkins:
-    image: jenkins-with-mvn
+    image: aazhernakov/jenkins-with-mvn
     container_name: jenkins
     ports:
       - "8080:8080"
