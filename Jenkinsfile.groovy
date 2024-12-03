@@ -17,14 +17,14 @@ pipeline {
 
         stage('Сборка JAR') {
             steps {
-                sh './mvn clean package' // Настройте в зависимости от вашего инструмента сборки (Maven/Gradle)
+                sh 'mvn clean package' // Настройте в зависимости от вашего инструмента сборки (Maven/Gradle)
             }
         }
 
         stage('Сборка Docker образа') {
             steps {
                 script {
-                    def app = docker.build("${IMAGE_NAME}:${env.BUILD_ID}")
+                    docker.build("${IMAGE_NAME}:${env.BUILD_ID}")
                 }
             }
         }
