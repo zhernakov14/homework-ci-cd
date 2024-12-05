@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh """
                     docker rm -f my-test-container || true
-                    docker run -d --network cicd_network --name my-test-container -p 8080:8080 homework-ci-cd
+                    docker run -d --network cicd_network --name my-test-container -p 8083:8083 homework-ci-cd
                 """
             }
         }
