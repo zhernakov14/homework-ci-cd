@@ -29,9 +29,7 @@ pipeline {
 
         stage('Запуск Docker контейнера') {
             steps {
-                script {
-                    docker.run("${IMAGE_NAME}:${env.BUILD_ID}") // Использование переменной IMAGE_NAME
-                }
+                sh "docker run -d --network jenkins_network -p 8080:8080 ${IMAGE_NAME}"
             }
         }
 
