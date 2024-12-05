@@ -33,35 +33,27 @@ pipeline {
             }
         }
 
-//        stage('Загрузка JAR в Nexus') {
-//            steps {
-//                script {
-//                    def server = Artifactory.server 'nexus-server' // Определите учетные данные сервера Nexus в Jenkins
-//                    def uploadSpec = """{
-//                        "files": [
-//                            {
-//                                "pattern": "target/*.jar", // Путь к вашему JAR файлу
-//                                "target": "${NEXUS_REPO}/" // Использование переменной NEXUS_REPO
-//                            }
-//                        ]
-//                    }"""
-//                    server.upload(uploadSpec)
-//                }
-//            }
-//        }
-
         stage('Upload JAR to Nexus') {
             steps {
-                // Загружаем JAR в Nexus
                 script {
-                    def jarFile = 'target/HomeworkCICD-0.0.1-SNAPSHOT.jar' // Укажите путь к вашему JAR файлу
-                    def nexusUrl = 'http://nexus:8081/repository/homework-cicd-repo/'
+                    // Настройки Nexus
+                    def jarFile = 'target/HomeworkCICD-0.0.1-SNAPSHOT.jar' // Путь к JAR файлу
+                    def groupId = 'com.example' // Ваш groupId
+                    def artifactId = 'HomeworkCICD' // Ваш artifactId
+                    def version = '0.0.1-SNAPSHOT' // Версия артефакта
+                    def nexusUrl = 'https://nexus:8081/repository/homework-cicd-repo'
                     def nexusUser = 'admin'
                     def nexusPassword = 'admin'
 
+                    // Формируем путь для Maven
+                    def mavenPath = "${groupId.replace('.', '/')}/${artifactId}/${version}/${artifactId}-${version}.jar" as Object
+
+                    // Загружаем JAR в Nexus
                     sh """
-                        curl -v -u ${nexusUser}:${nexusPassword} --upload-file ${jarFile} ${nexusUrl}
-                    """
+                curl -v -u ${nexusUser}:${nexusPassword} \
+                    --upload-file ${jarFile} \
+                    ${nexusUrl}/${mavenPath}
+            """
                 }
             }
         }
