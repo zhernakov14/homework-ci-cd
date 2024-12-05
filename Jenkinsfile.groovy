@@ -29,7 +29,7 @@ pipeline {
 
         stage('Запуск Docker контейнера') {
             steps {
-                sh "docker run -d --network cicd_network -p 8080:8080 ${IMAGE_NAME}"
+                sh "docker run -d --network cicd_network -p 8083:8083 ${IMAGE_NAME}"
             }
         }
 
