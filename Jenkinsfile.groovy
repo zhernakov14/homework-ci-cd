@@ -41,7 +41,7 @@ pipeline {
                     def groupId = 'com.example' // Ваш groupId
                     def artifactId = 'HomeworkCICD' // Ваш artifactId
                     def version = '0.0.1-SNAPSHOT' // Версия артефакта
-                    def nexusUrl = 'https://nexus:8081/repository/homework-cicd-repo'
+                    def nexusUrl = 'http://nexus:8081/repository/homework-cicd-repo'
                     def nexusUser = 'admin'
                     def nexusPassword = 'admin'
 
