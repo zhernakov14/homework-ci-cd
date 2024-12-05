@@ -53,10 +53,10 @@ pipeline {
 
                     // Загружаем JAR в Nexus
                     sh """
-                curl -v -u ${nexusUser}:${nexusPassword} \
-                    --upload-file ${jarFile} \
-                    ${nexusUrl}/${mavenPath}
-            """
+                        curl -v -u ${nexusUser}:${nexusPassword} \
+                        --upload-file ${jarFile} \
+                        ${nexusUrl}/${mavenPath}
+                    """
                 }
             }
         }
