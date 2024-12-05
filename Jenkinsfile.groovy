@@ -28,11 +28,11 @@ pipeline {
         }
 
         stage('Запуск Docker контейнера') {
-            script {
+            steps {
                 sh """
-                docker rm -f my-test-container || true
-                docker run -d --network cicd_network --name my-test-container -p 8080:8080 ${IMAGE_NAME}
-            """
+                    docker rm -f my-test-container || true
+                    docker run -d --network cicd_network --name my-test-container -p 8080:8080 homework-ci-cd
+                """
             }
         }
 
