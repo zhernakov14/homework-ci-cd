@@ -24,7 +24,7 @@ pipeline {
         stage('Сборка Docker образа') {
             steps {
                 script {
-                    docker.build("${IMAGE_NAME}:${env.BUILD_ID}")
+                    sh "docker build -t ${IMAGE_NAME} ."
                 }
             }
         }
