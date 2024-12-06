@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        timestamps()
+    }
+
     environment {
         REPO_URL = 'https://github.com/zhernakov14/homework-ci-cd.git'
         IMAGE_NAME = 'homework-ci-cd' // Имя Docker образа
@@ -11,7 +15,8 @@ pipeline {
     stages {
         stage('Клонирование репозитория') {
             steps {
-                git "${REPO_URL}" // Замените на URL вашего репозитория
+//                git "${REPO_URL}" // Замените на URL вашего репозитория
+                checkout scm
             }
         }
 
@@ -61,4 +66,11 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            cleanWs() // Очистка рабочего пространства после выполнения пайплайна
+        }
+    }
+
 }
